@@ -7,21 +7,31 @@ export const authConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      console.log("authorized", !!auth?.user, nextUrl);
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith("/dashboard");
-      if (isOnDashboard) {
+      const isProtected =
+        nextUrl.pathname.startsWith("/dashboard") ||
+        nextUrl.pathname.startsWith("/todo");
+      if (isProtected) {
         if (isLoggedIn) {
-          console.log("<- isOnDashboard && isLoggedIn", nextUrl);
           return true;
         }
-        console.log("<- isOnDashboard && !isLoggedIn", nextUrl);
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
         return Response.redirect(new URL("/dashboard", nextUrl));
       }
-      console.log("<- !isOnDashboard && !isLoggedIn", nextUrl);
       return true;
+    },
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.sub = user.id;
+      }
+      return token;
     },
   },
 } satisfies NextAuthConfig;
