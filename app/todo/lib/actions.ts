@@ -55,8 +55,8 @@ export async function createTodo(prevState: any, formData: FormData) {
     };
   }
 
-  revalidatePath("/todo");
-  // redirect("/todo");
+  revalidatePath("/todo/list");
+  // redirect("/todo/list");
 }
 
 export async function changeCompleted(id: string, formData: FormData) {
@@ -95,8 +95,8 @@ export async function changeCompleted(id: string, formData: FormData) {
     };
   }
 
-  revalidatePath("/todo");
-  // redirect("/todo");
+  revalidatePath("/todo/list");
+  // redirect("/todo/list");
 }
 
 export async function deleteTodo(id: string) {
@@ -127,6 +127,6 @@ export async function deleteTodo(id: string) {
       message: "Database Error: Failed to Update Todo.",
     };
   }
-  revalidatePath("/todo");
-  // redirect("/todo");
+  revalidatePath("/todo/list");
+  // redirect("/todo/list");
 }

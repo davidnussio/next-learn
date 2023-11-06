@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { ListTodos } from "./lib/component/list-todos";
+import { ListTodos } from "../lib/component/list-todos";
 
 interface ListTodosProps {
   searchParams?: {
@@ -8,5 +7,6 @@ interface ListTodosProps {
 }
 
 export default function TodoPage({ searchParams }: Readonly<ListTodosProps>) {
-  return <Link href="/todo/list">Lista cose da fare</Link>;
+  const completed = searchParams?.completed === "true";
+  return <ListTodos completed={completed} />;
 }
