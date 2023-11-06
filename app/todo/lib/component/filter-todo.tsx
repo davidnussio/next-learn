@@ -18,7 +18,7 @@ export function FilterTodo({ completed }: Readonly<{ completed: boolean }>) {
   };
 
   return (
-    <div className="relative flex flex-1 flex-shrink-0">
+    <div className="mb-4 flex items-center  ">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
@@ -30,7 +30,8 @@ export function FilterTodo({ completed }: Readonly<{ completed: boolean }>) {
         onChange={(e) => {
           handleSearch(e.target.checked);
         }}
-      />
+      />{" "}
+      <span className="pl-4">show not completed todos</span>
     </div>
   );
 }

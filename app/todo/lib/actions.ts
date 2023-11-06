@@ -40,10 +40,11 @@ export async function createTodo(prevState: any, formData: FormData) {
   const { title } = validatedFields.data;
 
   try {
+    const session = await getAuthSession();
     await prisma.todo.create({
       data: {
         title,
-        authorId: "410544b2-4001-4271-9855-fec4b6a6442a",
+        authorId: session.user.id,
         completed: false,
       },
     });
@@ -55,7 +56,7 @@ export async function createTodo(prevState: any, formData: FormData) {
   }
 
   revalidatePath("/todo");
-  redirect("/todo");
+  // redirect("/todo");
 }
 
 export async function changeCompleted(id: string, formData: FormData) {
@@ -95,7 +96,7 @@ export async function changeCompleted(id: string, formData: FormData) {
   }
 
   revalidatePath("/todo");
-  redirect("/todo");
+  // redirect("/todo");
 }
 
 export async function deleteTodo(id: string) {
@@ -127,5 +128,5 @@ export async function deleteTodo(id: string) {
     };
   }
   revalidatePath("/todo");
-  redirect("/todo");
+  // redirect("/todo");
 }
