@@ -49,6 +49,7 @@ export async function createTodo(prevState: any, formData: FormData) {
       },
     });
   } catch (e) {
+    console.log(e);
     return {
       errors: [],
       message: "Database Error: Failed to Create Todo.",
@@ -56,7 +57,7 @@ export async function createTodo(prevState: any, formData: FormData) {
   }
 
   revalidatePath("/todo/list");
-  // redirect("/todo/list");
+  redirect("/todo/list");
 }
 
 export async function changeCompleted(id: string, formData: FormData) {
