@@ -6,7 +6,6 @@
     "dev": "next dev",
     "start": "next start",
     "seed": "node -r dotenv/config ./scripts/seed.js",
-    "vercel-build": "prisma migrate deploy && next build",
     "lint": "next lint"
   },
   "dependencies": {
